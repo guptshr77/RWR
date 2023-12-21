@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadWorthy Resale</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: url('https://static.vecteezy.com/system/resources/previews/013/079/896/original/straight-road-travel-concept-illustration-png.png') center/cover;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 80px; /* Adjust as needed */
+            margin-right: 90px; /* Create space between image and text */
+			position: relative;
+			top: -15px;
+        }
+
+        .header-text {
+            text-align: left;
+			position: relative;
+			top: -20px;
+			left: -80px;
+			color: yellow;
+        }
+
+        nav {
+            background-color: #696;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 1em;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+        }
+
+        .sidebar {
+            background-color: #687;
+            padding: 1em;
+            text-align: left;
+            width: 200px;
+            margin-left: -50px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0.5em 0;
+            display: block;
+        }
+
+        .search-bar {
+            margin-top: 20px; /* Adjust as needed */
+            padding: 5px;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://tl.vhv.rs/dpng/s/489-4896015_muscle-car-clipart-vector-graphic-library-69-camaro.png" alt="RoadWorthy Resale Logo">
+        <div class="header-text">
+            <h1>RoadWorthy Resale</h1>
+            <p>Trustworthy, RoadWorthy, Find the perfect car for you</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="RWR_HPv2.html">Home</a>
+		<a href="rwrRandom.html">Random Car</a>
+		<a href="rwrCreateListing.html">List a Car</a>
+        <a href="rwrQnA.html">Contact Us</a>
+		<a href="rwr_myLikes.html">My Likes</a>
+		<!-- <a href="rwr_myProfile.html">Login/My Profile</a> -->
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar (on the left) -->
+        <div class="sidebar">
+			<a href="RWR_advSearchv3.html">Search</a>
+            <a href="rwrNewList.html">New Listings</a>
+            <a href="rwrTop.html">Top 100 Listings</a>
+            <a href="rwrQnA.html">Submit A Question</a>
+            <a href="rwrAboutUs.html">About Us</a>
+            
+        </div>
+
+        <main>
+			
+            <h2>Welcome to Roadworthy Resale</h2>
+            <p>Explore our wide range of high-quality used cars for sale. Find the perfect vehicle that suits your needs and
+                preferences.</p>
+            <p>Our dedicated team (of 3) is here to assist you throughout the process. Feel free to contact us if you have
+                any questions.</p>
+            <!-- Cars for Sale Section -->
+            <p>Naviagte to other pages to get information of actual cars.</p>
+            <section id="carListings"></section>
+            <main>
+                <h2>Random Car Listing Example:</h2>
+                <div class="car-listing" id="car-listing">
+                    <!-- <img src="https://via.placeholder.com/400" alt="Car Image"> -->
+                    <!-- <h3 id="carId">VIN</h3> -->
+                    <p id="model">Model:</p>
+                    <p id="man">Manufacturer: </p>
+                    <p id="price">Price: </p>
+                    <p id="d">Description: </p>
+                    <button type="button">Bookmark</button>
+                    <p id="message"></p>
+                </div>
+            </main>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 RoadWorthyResale. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const userid = localStorage.getItem("userid"); 
+        document.getElementById("message").textContent = `${userid}`;
+    </script>
+</body>
+
+</html>

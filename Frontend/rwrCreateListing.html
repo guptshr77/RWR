@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List a Car - RoadWorthy Resale</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 1em;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+            text-align: center;
+        }
+
+        .sidebar {
+            background-color: #687;
+            padding: 1em;
+            text-align: left;
+            width: 200px;
+            margin-left: -150px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0.5em 0;
+            display: block;
+        }
+
+        .login-box {
+            border: 1px solid #ddd;
+            padding: 1em;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        /* Form styles */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RoadWorthy Resale</h1>
+    </header>
+
+    <nav>
+        <a href="RWR_HPv2.html">Home</a>
+        <a href="rwrAllCar.html">Cars for Sale</a>
+        <a href="rwrRandom.html">Random Car</a>
+        <a href="rwrCreateListing.html">List a Car</a>
+        <a href="rwrQnA.html">Contact Us</a>
+        <a href="rwr_myLikes.html">My Likes</a>
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar (on the left) -->
+        <div class="sidebar">
+            <a href="RWR_advSearchv3.html">Search</a>
+            <a href="rwrAllCar.html">All Cars</a>
+            <a href="rwrNewList.html">New Listings</a>
+            <a href="rwrTop.html">Top 100 Listings</a>
+            <a href="rwrRec.html">RWR Recommended</a>
+            <a href="rwrQnA.html">Submit A Question</a>
+            <a href="rwrAboutUs.html">About Us</a>
+        </div>
+
+        <main>
+            <h2>List a Car</h2>
+            <div>
+                <label for="carId">Car ID:</label>
+                <input type="text" id="carId" name="carId" required>
+
+                <label for="region">Region:</label>
+                <input type="text" id="region" name="region">
+
+                <label for="madeYear">Made Year:</label>
+                <input type="number" id="madeYear" name="madeYear">
+
+                <label for="manufacturer">Manufacturer:</label>
+                <input type="text" id="manufacturer" name="manufacturer">
+
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model">
+
+                <label for="carCondition">Car Condition:</label>
+                <input type="text" id="carCondition" name="carCondition">
+
+                <label for="cylinder">Cylinder:</label>
+                <input type="text" id="cylinder" name="cylinder">
+
+                <label for="fuel">Fuel Type:</label>
+                <input type="text" id="fuel" name="fuel">
+
+                <label for="odometer">Odometer:</label>
+                <input type="number" id="odometer" name="odometer">
+
+                <label for="titleStatus">Title Status:</label>
+                <input type="text" id="titleStatus" name="titleStatus">
+                
+                <label for="carType">Car Type:</label>
+                <input type="text" id="carType" name="carType">
+
+                <label for="transmission">Transmission:</label>
+                <input type="text" id="transmission" name="transmission">
+
+                <label for="vin">VIN:</label>
+                <input type="text" id="vin" name="vin">
+
+                <label for="drive">Drive:</label>
+                <input type="text" id="drive" name="drive">
+
+                <label for="paintColor">Paint Color:</label>
+                <input type="text" id="paintColor" name="paintColor"></input>
+
+                <label for="locState">State:</label>
+                <input type="text" id="locState" name="locState"></input>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price"></input>
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description"></input>
+
+                <button onclick="turnIn()">Submit Listing</button>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 RoadWorthyResale. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const URL = url => `http://localhost:8080/${url}`;
+        const userid = localStorage.getItem("userid");
+        console.log(userid);
+        async function turnIn() {
+            // Placeholder function, replace with actual login logic
+            //alert("Login button clicked. Replace this with your authentication logic.");
+            const carId = document.getElementById("carId").value;
+            const region = document.getElementById("region").value;
+            const madeYear = document.getElementById("madeYear").value;
+            const manufacturer = document.getElementById("manufacturer").value;
+            const model = document.getElementById("model").value;
+            const carCondition = document.getElementById("carCondition").value;
+            const cylinder = document.getElementById("cylinder").value;
+            const fuel = document.getElementById("fuel").value;
+            const odometer = document.getElementById("odometer").value;
+            const titleStatus = document.getElementById("titleStatus").value;
+            const transmission = document.getElementById("transmission").value;
+            const vin = document.getElementById("vin").value;
+            const drive = document.getElementById("drive").value;
+            const paintColor = document.getElementById("paintColor").value;
+            const locState = document.getElementById("locState").value;
+            const price = document.getElementById("price").value;
+            const description = document.getElementById("description").value;
+            const carType = document.getElementById("carType").value;
+            
+            get(carId, region, madeYear, manufacturer, model, carCondition, cylinder, fuel, odometer, titleStatus, transmission, vin, drive, paintColor, locState, price, description, carType);
+        }
+
+        async function get(carId, region, madeYear, manufacturer, model, carCondition, cylinder, fuel, odometer, titleStatus, transmission, vin, drive, paintColor, locState, price, description, carType) {
+            const u = `/createposting?userId=${userid}&carId=${carId}&price=${price}&description=${description}&region=${region}&madeYear=${madeYear}&manufacturer=${manufacturer}&model=${model}&carCondition=${carCondition}&cylinder=${cylinder}&fuel=${fuel}&odometer=${odometer}&titleStatus=${titleStatus}&transmission=${transmission}&vin=${vin}&drive=${drive}&carType=${carType}&paintColor=${paintColor}&locState=${locState}`;
+            console.log(u);
+            const res = await fetch(URL(u),{
+                method: "GET",
+                mode:"cors",
+                headers:{"Content-Type":"application/json"}
+            })
+            const obj = await res.text();  
+
+            document.getElementById("message").textContent = `${obj}`;
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+</html>

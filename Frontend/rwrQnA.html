@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Question - RoadWorthy Resale</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 1em;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-left: -20px; /* Adjust as needed */
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+        }
+
+        .sidebar {
+            background-color: #687;
+            padding: 1em;
+            text-align: left;
+            width: 200px;
+			margin-left: 5px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0.5em 0;
+            display: block;
+        }
+
+        .submit-question-form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-question-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .submit-question-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .submit-question-form input[type="submit"] {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RoadWorthy Resale</h1>
+        <p>Trustworthy, RoadWorthy, Find the perfect car for you</p>
+    </header>
+
+    <nav>
+        <a href="RWR_HPv2.html">Home</a>
+		<a href="rwrRandom.html">Random Car</a>
+		<a href="rwrCreateListing.html">List a Car</a>
+        <a href="rwr_myLikes.html">My Likes</a>
+		<!-- <a href="rwr_myProfile.html">Login/My Profile</a> -->
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar (on the left) -->
+        <div class="sidebar">
+         <a href="RWR_advSearchv3.html">Search</a>
+            <a href="rwrNewList.html">New Listings</a>
+            <a href="rwrTop.html">Top 100 Listings</a>
+            <a href="rwrQnA.html">Submit A Question</a>
+            <a href="rwrAboutUs.html">About Us</a>
+        </div>
+
+        <main>
+			<label for="thisIs">This is a:</label>
+            <select id="thisIs" This is a="thisIs">
+                <option value="reportUser">Report User</option>
+				<option value="reportListing">Report Listing</option>
+				<option value="transactionFraud">Transaction Fraud</option>
+                <option value="bugReport">Bug Report</option>
+				<option value="other">Other</option>
+                <option value="addReview">Add a Review</option>
+            </select><br>
+            <h2>Submit a Question/Contact Us</h2>
+            <p>If submitting a Review, please format your message in the following way:</p>
+            <p>Id_of_person_being_rated - star_value - comment</p>
+            <div class="submit-question-form">
+                <label for="reponse">Please Provide your Feedback/Concerns here:</label>
+                <textarea id="question" name="question" required></textarea>
+
+                <button onclick="login()">Submit</button>
+                <p id="message"></p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const URL = url => `http://localhost:8080/${url}`;
+        const userid = localStorage.getItem("userid");
+        console.log(userid);
+        function login() {
+            // Placeholder function, replace with actual login logic
+            //alert("Login button clicked. Replace this with your authentication logic.");
+            const subject = document.getElementById("thisIs").value;
+            const content = document.getElementById("question").value;
+            getConsumer(subject, content);
+        }
+        
+        async function getConsumer(subject, content){
+            const u = `/report?content=${content}&subject=${subject}&senderId=${userid}`;
+            console.log(u);
+            const res = await fetch(URL(`/report?content=${content}&subject=${subject}&senderId=${userid}`),{
+                method: "GET",
+                mode:"cors",
+                headers:{"Content-Type":"application/json"}
+            })
+            const obj = await res.text();  
+
+            document.getElementById("message").textContent = `${obj}`;
+
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2023 RoadWorthyResale. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

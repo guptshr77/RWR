@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RoadWorthy Resale</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 1em;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-left: -20px; /* Adjust as needed */
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RoadWorthy Resale</h1>
+        <p>Trustworthy, RoadWorthy, Find the perfect car for you</p>
+    </header>
+    <nav>
+        <a href="RWR_HPv2.html">Home</a>
+		<a href="rwrRandom.html">Random Car</a>
+		<a href="rwrCreateListing.html">List a Car</a>
+        <a href="rwrQnA.html">Contact Us</a>
+		<a href="rwr_myLikes.html">My Likes</a>
+		<a href="rwr_myProfile.html">Login/My Profile</a>
+		
+    </nav>
+
+    <div class="container">
+        <main>
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login</h2>
+            <div class="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="button" onclick="login()">Login</button>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 RoadWorthyResale. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const URL = url => `http://localhost:8080/${url}`;
+        function login() {
+            // Placeholder function, replace with actual login logic
+            //alert("Login button clicked. Replace this with your authentication logic.");
+            const email = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            getConsumer(email,pass);
+        }
+
+        async function getConsumer(email, pass){
+            const res = await fetch(URL(`/login?email=${email}&password=${pass}`),{
+                method: "GET",
+                mode:"cors",
+                headers:{"Content-Type":"application/json"}
+            })
+            const obj = await res.json();
+            if(obj.userid == 0){
+                const message = "Incorrect username or password";
+                window.location.replace("http://localhost/rwr/rwr_myProfile.html");
+            }else{
+                // document.getElementById("newtxt").textContent = `${obj.userid} , ${obj.email}, ${obj.firstname}, ${obj.lastname} `;
+                localStorage.setItem("userid", obj.userid);
+                localStorage.setItem("firstname",obj.firstname);
+                localStorage.setItem("lastname", obj.lastname)
+                const email2 = localStorage.getItem("email");
+                window.location.replace("http://localhost/rwr/RWR_HPv2.html");            
+
+            }
+        }
+    </script>
+
+</body>

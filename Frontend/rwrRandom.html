@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Car Listing - RoadWorthy Resale</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 1em;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-left: -20px; /* Adjust as needed */
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+        }
+
+        .sidebar {
+            background-color: #687;
+            padding: 1em;
+            text-align: left;
+            width: 200px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0.5em 0;
+            display: block;
+        }
+
+        .car-listing {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .car-listing img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RoadWorthy Resale</h1>
+        <p>Feelin' Lucky eh?</p>
+    </header>
+
+    <nav>
+        <a href="RWR_HPv2.html">Home</a>
+		<a href="rwrRandom.html">Random Car</a>
+		<a href="rwrCreateListing.html">List a Car</a>
+        <a href="rwrQnA.html">Contact Us</a>
+		<a href="rwr_myLikes.html">My Likes</a>
+		<!-- <a href="rwr_myProfile.html">Login/My Profile</a> -->
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar (on the left) -->
+        <div class="sidebar">
+            
+			<a href="RWR_advSearchv3.html">Search</a>
+            <a href="rwrNewList.html">New Listings</a>
+            <a href="rwrTop.html">Top 100 Listings</a>
+            <a href="rwrQnA.html">Submit A Question</a>
+            <a href="rwrAboutUs.html">About Us</a>
+        </div>
+
+        <main>
+            <h2>Random Car Listing</h2>
+            <div class="car-listing" id="car-listing">
+                <!-- <img src="https://via.placeholder.com/400" alt="Car Image"> -->
+                <!-- <h3 id="carId">VIN</h3> -->
+                <p id="model">Model: </p>
+                <p id="man">Manufacturer: </p>
+                <p id="price">Price: </p>
+                <p id="d">Description: </p>
+                <button id="bookmarkbutton" data-listing-id="" onclick="bookmark(this)">Bookmark</button>
+                <p id="message"></p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const URL = url => `http://localhost:8080${url}`;
+        const userid = localStorage.getItem("userid");
+        console.log(userid);
+        getRCar();
+        async function getRCar(){
+            const obj = await get();
+            const o = document.getElementById("car-listing");
+            for (let i = 0; i<=0; i++) {
+                const clone = o.cloneNode(true);
+
+                // var carIdE = clone.querySelector("#carId")
+                // var carIdV = obj[`${i}`].vin;
+
+                // if (carIdV !== null && carIdV !== undefined){ 
+                //     clone.querySelector("#carId").innerText = obj[`${i}`].carId;
+                // } else{
+                //     carIdE.innerText = "N/A";
+                // }
+
+                clone.querySelector("#bookmarkbutton").setAttribute("data-listing-id", obj.listingId); 
+
+                var modelE = clone.querySelector("#model");
+                var modelV = obj.model;
+
+                if (modelV !== null && modelV !== undefined){ 
+                    clone.querySelector("#model").innerText = obj.model;
+                } else{
+                    modelE.innerText = "N/A";
+                }
+
+                clone.querySelector("#price").innerText = "$" + obj.price;
+            
+                var descriptionE = clone.querySelector("#d");
+                var descriptionV = obj.description;
+
+                if (descriptionV !== null && descriptionV !== undefined){ 
+                    clone.querySelector("#d").innerText = obj.description;
+                } else{
+                    descriptionE.innerText = "N/A";
+                }
+
+                var manufacturerE = clone.querySelector("#man");
+                var manufacturerV = obj.manufacturer;
+                
+                if (manufacturerV !== null && manufacturerV !== undefined){ 
+                    clone.querySelector("#man").innerText = obj.manufacturer;
+                } else{
+                    manufacturerE.innerText = "N/A";
+                }
+                o.parentElement.appendChild(clone);
+            }
+            o.style.display = "none";
+
+        }
+
+        async function bookmark(button){
+            const listid = button.getAttribute("data-listing-id");
+            const u = `/bookmark?listingId=${listid}&userId=${userid}`;
+            console.log(u);
+            const bm = await fetch(URL(u),{
+                method: "GET",
+                mode: "cors",
+                headers:{"Content-Type":"application/json"}
+            })
+            const bmobj = await bm.json();
+            document.getElementById("message").textContent = `${bmobj.message}`;
+        }
+
+        async function get(){
+            const res = await fetch(URL(`/getrandomlisting`),{
+                method: "GET",
+                mode:"cors",
+                headers:{"Content-Type":"application/json"}
+            })
+            const obj = await res.json(); 
+            return obj;           
+        }
+
+    </script>
+    <footer>
+        <p>&copy; 2023 RoadWorthyResale. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
