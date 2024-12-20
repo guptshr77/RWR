@@ -1,7 +1,3 @@
-Run Backend for Java.
-Run Frontend for HTML/JS.
-xaamp used to host application locally.
-
 # RoadWorthy Resale
 This was a final project for a Database Management Systems course. This application is a car resale platform. This application allows a user to create an account, log in, and search cars in different ways (search by brand, my likes, and other keywords), create a new listing of a car you wanna sell, and interact with the listings.
 
